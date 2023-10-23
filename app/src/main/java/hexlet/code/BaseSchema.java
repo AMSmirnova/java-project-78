@@ -23,7 +23,6 @@ public class BaseSchema {
     }
 
     public void put(String name, Predicate<Object> condition) {
-        System.out.println(name);
         conditions.put(name, condition);
     }
 }
