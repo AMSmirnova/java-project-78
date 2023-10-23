@@ -2,51 +2,36 @@ package hexlet.code;
 
 import java.util.Objects;
 
-public class StringSchema {
-
-    private boolean isRequired = false;
-    private boolean isMinLength = false;
-    private int minLength;
-    private boolean isContains = false;
-    private String data;
+public class StringSchema extends BaseSchema {
+    private BaseSchema baseSchema;
+    public StringSchema() {
+        baseSchema = new BaseSchema();
+    }
+    @Override
     public boolean isValid(Object obj) {
-        String str;
-        if (!(obj instanceof String)) {
+        if (!(obj instanceof String) && obj != null) {
             return false;
         } else {
-            str = obj.toString();
+            return baseSchema.isValid(obj);
         }
-        return isValid(str);
     }
-    public boolean isValid(String str) {
 
-        if (isRequired && (Objects.equals(str, "") || Objects.equals(str, null))) {
-            return false;
-        }
-        if (isMinLength && (str.length() < minLength)) {
-            return false;
-        }
-
-        if (isContains && !str.contains(data)) {
-            return false;
-        }
-
-        return true;
-    }
+    @Override
     public StringSchema required() {
-        isRequired = true;
+        Predicate<Object> isEmptyString = x -> !Objects.equals(x, "");
+        baseSchema.put("required", isEmptyString);
+        baseSchema.required();
         return this;
     }
-
     public StringSchema minLength(int length) {
-        isMinLength = true;
-        minLength = length;
+        Predicate<Object> minLength = x -> x.toString().length() >= length;
+        baseSchema.put("minlength", minLength);
         return this;
     }
 
     public StringSchema contains(String data) {
-        isContains = true;
-        this.data = data;
+        Predicate<Object> isContains = x -> x.toString().contains(data);
+        baseSchema.put("contains", isContains);
         return this;
     }
 }
