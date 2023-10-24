@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class BaseSchema {
+public abstract class BaseSchema {
     private Map<String, Predicate<Object>> conditions;
 
     public BaseSchema() {
