@@ -8,7 +8,7 @@ import java.util.Objects;
 
 
 public class BaseSchema {
-    Map<String, Predicate<Object>> conditions;
+    private Map<String, Predicate<Object>> conditions;
 
     public BaseSchema() {
         this.conditions = new HashMap<>();

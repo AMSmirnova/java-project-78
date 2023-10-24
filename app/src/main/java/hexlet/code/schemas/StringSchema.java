@@ -4,7 +4,7 @@ import hexlet.code.Predicate;
 
 import java.util.Objects;
 
-public class StringSchema extends BaseSchema {
+public final class StringSchema extends BaseSchema {
     private BaseSchema baseSchema;
     @Override
     public boolean isValid(Object obj) {

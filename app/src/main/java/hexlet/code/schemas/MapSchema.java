@@ -5,8 +5,7 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.Predicate;
 
-public class MapSchema extends BaseSchema {
-
+public final class MapSchema extends BaseSchema {
 
     @Override
     public boolean isValid(Object obj) {

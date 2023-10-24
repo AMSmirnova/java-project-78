@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 import hexlet.code.Predicate;
 
-public class NumberSchema extends BaseSchema {
+public final class NumberSchema extends BaseSchema {
 
     public boolean isValid(Object obj) {
         if (!(obj instanceof Integer) && obj != null) {
