@@ -1,8 +1,9 @@
-package hexlet.code;
+package hexlet.code.schemas;
 
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hexlet.code.Predicate;
 
 public class MapSchema extends BaseSchema {
 
