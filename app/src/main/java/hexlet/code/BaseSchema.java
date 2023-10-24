@@ -18,11 +18,11 @@ public class BaseSchema {
 
     public BaseSchema required() {
         Predicate<Object> isRequired = Objects::nonNull;
-        this.put("base required", isRequired);
+        this.addCondition("base required", isRequired);
         return this;
     }
 
-    public void put(String name, Predicate<Object> condition) {
+    public void addCondition(String name, Predicate<Object> condition) {
         conditions.put(name, condition);
     }
 }

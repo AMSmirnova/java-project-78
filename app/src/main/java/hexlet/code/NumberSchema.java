@@ -17,14 +17,14 @@ public class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema positive() {
-        Predicate<Object> isPositive = x -> (int) x > 0;
-        super.put("positive", isPositive);
+        Predicate<Object> isPositive = x -> (x == null) || ((int) x > 0);
+        super.addCondition("positive", isPositive);
         return this;
     }
 
     public NumberSchema range(int min, int max) {
-        Predicate<Object> isInRange = x -> ((int) x >= min && (int) x <= max);
-        super.put("range", isInRange);
+        Predicate<Object> isInRange = x -> (x == null) || ((int) x >= min && (int) x <= max);
+        super.addCondition("range", isInRange);
         return this;
     }
 }

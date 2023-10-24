@@ -88,4 +88,41 @@ public class TestApp {
         data.put("key2", "value2");
         assertThat(schema.isValid(data)).isTrue();
     }
+
+    @Test
+    public void testShapes() {
+        Validator v = new Validator();
+
+        MapSchema schema = v.map();
+        Map<String, BaseSchema> schemas = new HashMap<>();
+        schemas.put("name", v.string().required());
+        schemas.put("age", v.number().positive().range(-10, 50));
+
+        schema.shape(schemas);
+
+        Map<String, Object> human1 = new HashMap<>();
+        human1.put("name", "Kolya");
+        human1.put("age", 40);
+        assertThat(schema.isValid(human1)).isTrue();
+
+        Map<String, Object> human2 = new HashMap<>();
+        human2.put("name", "Maya");
+        human2.put("age", null);
+        assertThat(schema.isValid(human2)).isTrue();
+
+        Map<String, Object> human3 = new HashMap<>();
+        human3.put("name", "");
+        human3.put("age", null);
+        assertThat(schema.isValid(human3)).isFalse();
+
+        Map<String, Object> human4 = new HashMap<>();
+        human4.put("name", "Valya");
+        human4.put("age", -5);
+        assertThat(schema.isValid(human4)).isFalse();
+
+        Map<String, Object> human5 = new HashMap<>();
+        human1.put("name", "Petya");
+        human1.put("age", 51);
+        assertThat(schema.isValid(human5)).isFalse();
+    }
 }

@@ -16,19 +16,19 @@ public class StringSchema extends BaseSchema {
     @Override
     public StringSchema required() {
         Predicate<Object> isEmptyString = x -> !Objects.equals(x, "");
-        super.put("required", isEmptyString);
+        super.addCondition("required", isEmptyString);
         super.required();
         return this;
     }
     public StringSchema minLength(int length) {
         Predicate<Object> minLength = x -> x.toString().length() >= length;
-        super.put("minlength", minLength);
+        super.addCondition("minlength", minLength);
         return this;
     }
 
     public StringSchema contains(String data) {
         Predicate<Object> isContains = x -> x.toString().contains(data);
-        super.put("contains", isContains);
+        super.addCondition("contains", isContains);
         return this;
     }
 }

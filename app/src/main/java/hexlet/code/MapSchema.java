@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MapSchema extends BaseSchema {
 
+
     @Override
     public boolean isValid(Object obj) {
         if (!(obj instanceof Map<?, ?>) && obj != null) {
@@ -27,7 +28,18 @@ public class MapSchema extends BaseSchema {
             Map<?, ?> map = mapper.convertValue(x, Map.class);
             return map.size() == amount;
         };
-        super.put("sizeof", sizeOf);
+        super.addCondition("sizeof", sizeOf);
         return this;
+    }
+
+    public void shape(Map<String, BaseSchema> schemas) {
+        schemas.forEach((key, value) -> {
+            Predicate<Object> conditionForValues = x -> {
+                ObjectMapper mapper = new ObjectMapper();
+                Map<?, ?> map = mapper.convertValue(x, Map.class);
+                return value.isValid(map.get(key));
+            };
+            super.addCondition("condition for" + key, conditionForValues);
+        });
     }
 }
