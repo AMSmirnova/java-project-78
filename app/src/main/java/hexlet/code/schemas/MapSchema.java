@@ -7,19 +7,9 @@ import hexlet.code.Predicate;
 
 public final class MapSchema extends BaseSchema {
 
-    @Override
-    public boolean isValid(Object obj) {
-        if (!(obj instanceof Map<?, ?>) && obj != null) {
-            return false;
-        } else {
-            return super.isValid(obj);
-        }
-    }
-
-    @Override
-    public MapSchema required() {
-        super.required();
-        return this;
+    public MapSchema() {
+        Predicate<Object> isMap = x -> (x instanceof Map || x == null);
+        super.addCondition("isMap", isMap);
     }
 
     public MapSchema sizeof(int amount) {

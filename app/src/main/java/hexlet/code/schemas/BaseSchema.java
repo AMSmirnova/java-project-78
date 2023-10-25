@@ -14,13 +14,15 @@ public abstract class BaseSchema {
         this.conditions = new HashMap<>();
     }
 
-    protected boolean isValid(Object object) {
+    public final boolean isValid(Object object) {
         return conditions.values().stream().allMatch(n -> n.test(object));
     }
 
-    protected BaseSchema required() {
+    public final BaseSchema required() {
         Predicate<Object> isRequired = Objects::nonNull;
         this.addCondition("base required", isRequired);
+        Predicate<Object> isEmptyString = x -> !Objects.equals(x, "");
+        this.addCondition("isEmptyString", isEmptyString);
         return this;
     }
 

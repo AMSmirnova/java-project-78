@@ -4,19 +4,9 @@ import hexlet.code.Predicate;
 
 public final class NumberSchema extends BaseSchema {
 
-    @Override
-    public boolean isValid(Object obj) {
-        if (!(obj instanceof Integer) && obj != null) {
-            return false;
-        } else {
-            return super.isValid(obj);
-        }
-    }
-
-    @Override
-    public NumberSchema required() {
-        super.required();
-        return this;
+    public NumberSchema() {
+        Predicate<Object> isNumber = x -> (x instanceof Integer || x == null);
+        super.addCondition("isNumber", isNumber);
     }
 
     public NumberSchema positive() {
