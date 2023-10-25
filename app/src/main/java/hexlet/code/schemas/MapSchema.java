@@ -1,6 +1,7 @@
 package hexlet.code.schemas;
 
 import java.util.Map;
+import java.util.Objects;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.Predicate;
@@ -10,6 +11,12 @@ public final class MapSchema extends BaseSchema {
     public MapSchema() {
         Predicate<Object> isMap = x -> (x instanceof Map || x == null);
         super.addCondition("isMap", isMap);
+    }
+
+    public MapSchema required() {
+        Predicate<Object> isRequired = Objects::nonNull;
+        this.addCondition("required", isRequired);
+        return this;
     }
 
     public MapSchema sizeof(int amount) {

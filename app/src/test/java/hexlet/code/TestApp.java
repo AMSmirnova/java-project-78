@@ -23,6 +23,7 @@ public class TestApp {
 
         assertThat(schema.isValid("")).isTrue();
         assertThat(schema.isValid(null)).isTrue();
+        assertThat(schema.minLength(4).isValid(null)).isTrue();
 
         assertThat(schema.isValid(5)).isFalse();
 
@@ -35,7 +36,7 @@ public class TestApp {
 
         assertThat(schema.isValid("hexlet")).isTrue();
 
-        assertThat(schema.minLength(4).isValid("what does the fox say")).isTrue();
+        assertThat(schema.isValid("what does the fox say")).isTrue();
         assertThat(schema.isValid("wha")).isFalse();
 
         assertThat(schema.contains("wh").isValid("what does the fox say")).isTrue();
@@ -101,7 +102,7 @@ public class TestApp {
 
         MapSchema schema = v.map();
         Map<String, BaseSchema> schemas = new HashMap<>();
-        schemas.put("name", v.string().required());
+        schemas.put("name", v.string().required().contains("ya"));
         schemas.put("age", v.number().positive().range(-10, 50));
 
         schema.shape(schemas);

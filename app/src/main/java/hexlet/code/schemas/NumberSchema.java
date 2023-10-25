@@ -2,11 +2,19 @@ package hexlet.code.schemas;
 
 import hexlet.code.Predicate;
 
+import java.util.Objects;
+
 public final class NumberSchema extends BaseSchema {
 
     public NumberSchema() {
         Predicate<Object> isNumber = x -> (x instanceof Integer || x == null);
         super.addCondition("isNumber", isNumber);
+    }
+
+    public NumberSchema required() {
+        Predicate<Object> isRequired = Objects::nonNull;
+        this.addCondition("required", isRequired);
+        return this;
     }
 
     public NumberSchema positive() {
