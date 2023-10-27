@@ -1,11 +1,10 @@
 package hexlet.code.schemas;
 
-import hexlet.code.Predicate;
-
+import java.util.function.Predicate;
 import java.util.Objects;
 
 public final class StringSchema extends BaseSchema {
-    private BaseSchema baseSchema;
+
     public StringSchema() {
         Predicate<Object> isString = x -> (x instanceof String || x == null);
         super.addCondition("isString", isString);

@@ -1,7 +1,6 @@
 package hexlet.code.schemas;
 
-import hexlet.code.Predicate;
-
+import java.util.function.Predicate;
 import java.util.Objects;
 
 public final class NumberSchema extends BaseSchema {

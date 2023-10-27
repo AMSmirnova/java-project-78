@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hexlet.code.Predicate;
+import java.util.function.Predicate;
 
 public final class MapSchema extends BaseSchema {
 
